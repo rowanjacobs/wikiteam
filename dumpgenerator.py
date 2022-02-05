@@ -1523,9 +1523,13 @@ def generateImageDump(config={}, other={}, images=[], start='', session=None):
                     session=session)  # use Image: for backwards compatibility
         except PageMissingError:
             xmlfiledesc = ''
+            try:
+                text=u'The page "%s" was missing in the wiki (probably deleted)' % (title.decode('utf-8'))
+            except:
+                text=u'A page was missing in the wiki (probably deleted)'
             logerror(
                 config=config,
-                text=u'The page "%s" was missing in the wiki (probably deleted)' % (title.decode('utf-8'))
+                text=text
             )
 
         f = open('%s/%s.desc' % (imagepath, filename2), 'w')
