@@ -24,6 +24,7 @@ import sys
 import time
 import requests
 import urlparse
+import traceback
 from io import BytesIO
 from xml.sax.saxutils import quoteattr
 from internetarchive import get_item
@@ -248,6 +249,7 @@ def upload(wikis, config={}, uploadeddumps=[]):
                 uploadeddumps.append(dump)
             except Exception as e:
                 print wiki, dump, 'Error when uploading?'
+                traceback.print_exc()
                 print(e)
             try:
                 log(wiki, dump, 'ok', config)
